@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Sample-efficient imitation learning">
+  <meta name="keywords" content="Robotics, Robotic manipulation, Deep learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SEIL: Simulation-augmented Equivariant Imitation Learning</title>
+
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QY7838Q5K7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QY7838Q5K7');
+</script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Open-vocabulary Pick and Place via Patch-level Semantic Maps</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://saulbatman.github.io/">Mingxi Jia*</a><sup></sup>,</span>
+            <span class="author-block">
+              <a href="https://haojhuang.github.io/">Haojie Huang*</a><sup></sup>,</span>
+            <span class="author-block">
+              <a href="https://openreview.net/profile?id=~Zhewen_Zhang1">Zhewen Zhang</a><sup></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/chenghao-wang-01a036203">Chenghao Wang</a><sup></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://lfzhao.com/">Linfeng Zhao</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://pointw.github.io/">Dian Wang</a><sup></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://jasonxyliu.github.io/">Jason Xinyu Liu</a><sup></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.khoury.northeastern.edu/people/robin-walters/">Robin Walters</a><sup></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.khoury.northeastern.edu/people/robert-platt/">Robert Platt</a><sup></sup>
+            </span>
+            <span class="author-block">
+              <a href="https://vivo.brown.edu/display/stellex">Stefanie Tellex</a><sup></sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup></sup>Brown University Northeastern University</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>Equal contribution</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2406.15677"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2406.15677"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code coming soon!</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/equivariance_video.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Given limited data, SEIL learns robust close-loop controller.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/bowl_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/pick_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/pyramid_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/letter_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Controlling robots through natural language instructions in open-vocabulary scenarios is pivotal for enhancing human-robot collaboration and complex robot behavior synthesis. However, achieving this capability poses significant challenges due to the need for a system that can generalize from limited
+            data to a wide range of tasks and environments. Existing methods rely on large,
+            costly datasets and struggle with generalization. This paper introduces Grounded
+            Equivariant Manipulation (GEM), a novel approach that leverages the generative capabilities of pre-trained vision-language models and geometric symmetries
+            to facilitate few-shot and zero-shot learning for open-vocabulary robot manipulation tasks. Our experiments demonstrate GEM’s high sample efficiency and
+            superior generalization across diverse pick-and-place tasks in both simulation and
+            real-world experiments, showcasing its ability to adapt to novel instructions and
+            unseen objects with minimal data requirements. GEM advances a significant step
+            forward in the domain of language-conditioned robot control, bridging the gap
+            between semantic understanding and action generation in robotic systems.
+            </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Multi-task performance</h2>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/multitask_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Mobile Manipulation performance</h2>
+        <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/moma_video.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+
+      
+
+      <!-- Matting. -->
+      <div class="column">
+        <h2 class="title is-3">Text-conditioned semantic maps</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              The text-conditioned semantic map measures the text and image similaries in robot observation.
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/text_map_video.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Matting. -->
+
+    <!-- Matting. -->
+    <div class="column">
+      <h2 class="title is-3">Image-conditioned semantic maps</h2>
+      <div class="columns is-centered">
+        <div class="column content">
+          <p>
+            The image-conditioned semantic map measures the similaries between robot observation and seen objects.
+          </p>
+          <video id="matting-video" controls playsinline height="100%">
+            <source src="./static/videos/image_map_video.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Visual Effects. -->
+    <div class="column">
+      <div class="content">
+        <h2 class="title is-3">Language kernels fir equivariant picking</h2>
+        <p>
+          We realize local SE(2)-equivariance via steerable language kernels.
+        </p>
+        <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/language_kernel_video.mp4"
+                  type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <!--/ Visual Effects. -->
+  </div>
+  <!--/ Matting. -->
+
+    
+
+
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{jia2024open,
+      title={Open-vocabulary Pick and Place via Patch-level Semantic Maps},
+      author={Jia, Mingxi and Huang, Haojie and Zhang, Zhewen and Wang, Chenghao and Zhao, Linfeng and Wang, Dian and Liu, Jason Xinyu and Walters, Robin and Platt, Robert and Tellex, Stefanie},
+      journal={arXiv preprint arXiv:2406.15677},
+      year={2024}
+    }
+</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
